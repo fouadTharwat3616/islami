@@ -26,18 +26,21 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(image: DecorationImage(image: AssetImage('assets/images/default_bg.png'))),
+      decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage('assets/images/default_bg.png'),
+                  fit: BoxFit.cover
+          )
+      ),
       child: Scaffold(
-        backgroundColor: Colors.transparent,
         appBar: AppBar(
-          title:
-          Text('إسلامي',
-            style: TextStyle(color: appTheme.black,fontSize: 30,fontWeight: FontWeight.bold),
-          ),
+         title: Text(
+           'إسلامي'
+         ),
         ),
         body: tabs[selected_index],
-        bottomNavigationBar:
 
+        bottomNavigationBar:
         BottomNavigationBar(
           currentIndex: selected_index,
           onTap: (index) {
