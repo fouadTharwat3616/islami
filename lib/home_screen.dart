@@ -5,6 +5,9 @@ import 'package:islami/tabs/quran/quran.dart';
 import 'package:islami/tabs/radio/radio.dart';
 import 'package:islami/tabs/sebha/sebha.dart';
 import 'package:islami/tabs/settings/settings.dart';
+import 'package:islami/tabs/settings/settings_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -26,18 +29,21 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(image: DecorationImage(image: AssetImage('assets/images/default_bg.png'))),
+      decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage('assets/images/${Provider.of<settingsProvider>(context).backGroundName}.png'),
+                  fit: BoxFit.cover
+          )
+      ),
       child: Scaffold(
-        backgroundColor: Colors.transparent,
         appBar: AppBar(
-          title:
-          Text('إسلامي',
-            style: TextStyle(color: appTheme.black,fontSize: 30,fontWeight: FontWeight.bold),
-          ),
+         title: Text(
+          AppLocalizations.of(context)!.islami
+         ),
         ),
         body: tabs[selected_index],
-        bottomNavigationBar:
 
+        bottomNavigationBar:
         BottomNavigationBar(
           currentIndex: selected_index,
           onTap: (index) {
