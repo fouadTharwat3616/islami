@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:islami/app_theme.dart';
 import 'package:islami/loading_indicator.dart';
+import 'package:islami/tabs/settings/settings_provider.dart';
+import 'package:provider/provider.dart';
 
 class suraDetails extends StatefulWidget {
   static const String routeName='sura_details-screen';
@@ -24,7 +26,7 @@ class _suraDetailsState extends State<suraDetails> {
     return Container(
       decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage('assets/images/default_bg.png'),
+              image: AssetImage('assets/images/${Provider.of<settingsProvider>(context).backGroundName}.png'),
               fit: BoxFit.cover
           )
       ),
@@ -39,7 +41,7 @@ class _suraDetailsState extends State<suraDetails> {
           LoadingIndicator() :
         Container(
           decoration: BoxDecoration(
-            color: Colors.white,
+              color: Provider.of<settingsProvider>(context).container_sura_details_screen,
             borderRadius: BorderRadius.circular(25)
           ),
           padding: EdgeInsets.all(20),
@@ -48,8 +50,7 @@ class _suraDetailsState extends State<suraDetails> {
             vertical: MediaQuery.of(context).size.width*.05
           ),
           child: ListView.builder(itemBuilder: (context, index) => Text(ayat[index],
-            style: Theme.of(context).textTheme.titleMedium
-            ,
+            style: Theme.of(context).textTheme.titleMedium,
             textDirection: TextDirection.rtl,),
              itemCount: ayat.length,
       ),

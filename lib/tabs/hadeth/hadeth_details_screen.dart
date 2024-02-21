@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:islami/app_theme.dart';
 import 'package:islami/tabs/hadeth/hadeth_data.dart';
+import 'package:islami/tabs/settings/settings_provider.dart';
+import 'package:provider/provider.dart';
 
 class HadethDetails extends StatelessWidget {
   static const String routeName='hadeth_details-screen';
@@ -10,7 +12,7 @@ class HadethDetails extends StatelessWidget {
     return Container(
         decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('assets/images/default_bg.png'),
+                image: AssetImage('assets/images/${Provider.of<settingsProvider>(context).backGroundName}.png'),
                 fit: BoxFit.cover
             )
         ),
@@ -23,7 +25,7 @@ class HadethDetails extends StatelessWidget {
           body:
           Container(
             decoration: BoxDecoration(
-                color: Colors.white,
+                color: Provider.of<settingsProvider>(context).container_hadeth_details_screen,
                 borderRadius: BorderRadius.circular(25)
             ),
             padding: EdgeInsets.all(20),

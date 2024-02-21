@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:islami/app_theme.dart';
 import 'package:islami/tabs/quran/sura_details_screen.dart';
+import 'package:islami/tabs/settings/settings_provider.dart';
+import 'package:provider/provider.dart';
 
 class quranTap extends StatelessWidget {
     List<String> suraNames=["الفاتحه","البقرة","آل عمران","النساء","المائدة","الأنعام","الأعراف","الأنفال","التوبة","يونس","هود"
@@ -31,7 +33,7 @@ class quranTap extends StatelessWidget {
           padding: EdgeInsets.only(top:230),
           child: VerticalDivider(
             thickness: 5,
-            color: appTheme.primaryLight,
+            color: Provider.of<settingsProvider>(context).container,
           ),
         ),
         Column(
@@ -42,7 +44,7 @@ class quranTap extends StatelessWidget {
             Container(
               height: 4,
               width: double.infinity,
-              color: appTheme.primaryLight,
+              color: Provider.of<settingsProvider>(context).container,
               margin: EdgeInsets.only(bottom: 5),
             ),
             Row(
@@ -56,7 +58,7 @@ class quranTap extends StatelessWidget {
             Container(
               height: 4,
               width: double.infinity,
-              color: appTheme.primaryLight,
+              color: Provider.of<settingsProvider>(context).container,
               margin: EdgeInsets.only(bottom: 5),
             ),
             Expanded(

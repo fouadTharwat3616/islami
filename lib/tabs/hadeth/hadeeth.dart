@@ -4,6 +4,8 @@ import 'package:islami/app_theme.dart';
 import 'package:islami/loading_indicator.dart';
 import 'package:islami/tabs/hadeth/hadeth_data.dart';
 import 'package:islami/tabs/hadeth/hadeth_details_screen.dart';
+import 'package:islami/tabs/settings/settings_provider.dart';
+import 'package:provider/provider.dart';
 
 class HadeethTap extends StatefulWidget {
   @override
@@ -27,7 +29,7 @@ class _HadeethTapState extends State<HadeethTap> {
         Container(
           height: 4,
           width: double.infinity,
-          color: appTheme.primaryLight,
+          color: Provider.of<settingsProvider>(context).container,
           margin: EdgeInsets.only(bottom: 5),
         ),
         Row(
@@ -40,7 +42,7 @@ class _HadeethTapState extends State<HadeethTap> {
         Container(
           height: 4,
           width: double.infinity,
-          color: appTheme.primaryLight,
+          color: Provider.of<settingsProvider>(context).container,
           margin: EdgeInsets.only(bottom: 5),
         ),
         Expanded(
