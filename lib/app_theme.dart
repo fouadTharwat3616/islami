@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 class appTheme {
-  static Color primaryLight=Color(0xffB7935F);
-  static Color primaryDark=Color(0xff141A2E);
-  static Color black=Color(0xff242424);
-  static Color white=Color(0xffF8F8F8);
-  static Color gold=Color(0xffFACC1D);
+  static Color primaryLight=const Color(0xffB7935F);
+  static Color primaryDark=const Color(0xff141A2E);
+  static Color black=const Color(0xff242424);
+  static Color white=const Color(0xffF8F8F8);
+  static Color gold=const Color(0xffFACC1D);
+
   static ThemeData  lightTheme=ThemeData(
     scaffoldBackgroundColor: Colors.transparent,
     primaryColor: primaryLight,

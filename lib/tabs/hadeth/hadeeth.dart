@@ -30,7 +30,7 @@ class _HadeethTapState extends State<HadeethTap> {
           height: 4,
           width: double.infinity,
           color: Provider.of<settingsProvider>(context).container,
-          margin: EdgeInsets.only(bottom: 5),
+          margin: const EdgeInsets.only(bottom: 5),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -43,7 +43,7 @@ class _HadeethTapState extends State<HadeethTap> {
           height: 4,
           width: double.infinity,
           color: Provider.of<settingsProvider>(context).container,
-          margin: EdgeInsets.only(bottom: 5),
+          margin: const EdgeInsets.only(bottom: 5),
         ),
         Expanded(
           child:
@@ -63,7 +63,13 @@ class _HadeethTapState extends State<HadeethTap> {
             ),
               ),
             itemCount: ahadeth.length,
-            separatorBuilder:(context, index) => SizedBox(height: 8),
+            separatorBuilder:(context, index) =>  Divider(
+              height: 8,
+              thickness: 2,
+              endIndent: MediaQuery.of(context).size.width*.1,
+              indent: MediaQuery.of(context).size.width*.1,
+              color: Provider.of<settingsProvider>(context).container,
+            ),
             ),
                 ),
   ]
@@ -73,6 +79,22 @@ class _HadeethTapState extends State<HadeethTap> {
 
   Future<void> loadHadethFile() async
   {
+    String allAhadethContent=await rootBundle.loadString('assets/files/ahadeth.txt');
+    List<String> ahadethStrings = allAhadethContent.split('#');
+    ahadeth=ahadethStrings.map((hadethString){
+      List<String> hadethLines = hadethString.trim().split('\n');
+      String title=hadethLines[0];
+      hadethLines.removeAt(0);
+      List<String> content = hadethLines;
+      return hadethData(title, content);
+  }).toList();
+    setState(() {
+
+    });
+
+
+  }
+    /*
     String ahadethFileContent =await rootBundle.loadString('assets/files/ahadeth.txt');
     //List<String> ahadethStrings=ahadethFileContent.split('#\r\n');
     List<String> ahadethStrings=ahadethFileContent.split('#');
@@ -88,4 +110,6 @@ class _HadeethTapState extends State<HadeethTap> {
     });
 
   }
+  */
+
 }

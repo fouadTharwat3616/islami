@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:islami/app_theme.dart';
+import 'package:islami/home_screen.dart';
 import 'package:islami/loading_indicator.dart';
 import 'package:islami/tabs/settings/settings_provider.dart';
 import 'package:provider/provider.dart';
@@ -32,6 +33,18 @@ class _suraDetailsState extends State<suraDetails> {
       ),
       child: Scaffold(
         appBar: AppBar(
+          leading: InkWell(
+            onTap: (){
+              Navigator.of(context).pushNamed(HomeScreen.routeName
+              );
+            },
+            child: Icon(
+              Icons.arrow_back_sharp,
+              color:Provider.of<settingsProvider>(context).azqar_bk_color ,
+
+            ),
+          ),
+          elevation: 0,
           title: Text(
               Args.suraName
           ),
@@ -44,14 +57,15 @@ class _suraDetailsState extends State<suraDetails> {
               color: Provider.of<settingsProvider>(context).container_sura_details_screen,
             borderRadius: BorderRadius.circular(25)
           ),
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           margin: EdgeInsets.symmetric(
             horizontal: MediaQuery.of(context).size.width* .05,
-            vertical: MediaQuery.of(context).size.width*.05
+            vertical: MediaQuery.of(context).size.height*.03
           ),
-          child: ListView.builder(itemBuilder: (context, index) => Text(ayat[index],
+          child: ListView.builder(itemBuilder: (context, index) => Text('${ayat[index]} (${index+1})',
             style: Theme.of(context).textTheme.titleMedium,
-            textDirection: TextDirection.rtl,),
+            textDirection: TextDirection.rtl,
+          ),
              itemCount: ayat.length,
       ),
         ),

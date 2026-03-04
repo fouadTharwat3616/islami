@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:islami/app_theme.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 class settingsProvider with ChangeNotifier
 {
   ThemeMode themeMode =ThemeMode.light;
-  String languag = 'ar';
+  String languag = 'en';
+  SharedPreferences? sharedPreferences;
+
+
+
   String get backGroundName=>
       themeMode==ThemeMode.light?'default_bg':'dark_bg';
   Color get azqar_bk_color =>
@@ -28,11 +33,14 @@ class settingsProvider with ChangeNotifier
 
   Color get settings_text=>
       themeMode==ThemeMode.light? appTheme.black: appTheme.gold;
-  void changeTheme(ThemeMode selectedTheme){
+
+  void changeTheme(ThemeMode selectedTheme)async{
     if(selectedTheme == themeMode) {
       return;
     }
     themeMode = selectedTheme;
+    await saveTheme(selectedTheme);
+
     notifyListeners();
 
   }
@@ -42,6 +50,61 @@ class settingsProvider with ChangeNotifier
       return;
     }
     languag = selectedLanguage;
+    saveLanguage(selectedLanguage);
+
     notifyListeners();
   }
+
+Future<void> saveTheme(ThemeMode themeMode)async
+{
+  String newTheme= themeMode==ThemeMode.dark? 'dark':'light';
+  await sharedPreferences!.setString('theme', newTheme);
+}
+
+String? getTheme()
+{
+  return sharedPreferences!.getString('theme');
+}
+
+Future<void> loadThemeData()async
+{
+
+  String? oldTheme=getTheme();
+  if(oldTheme!=null)
+    {
+      themeMode= oldTheme=='dark'?ThemeMode.dark:ThemeMode.light;
+    }
+  notifyListeners();
+
+}
+
+Future<void> saveLanguage(String lang)async
+{
+  await sharedPreferences!.setString('lang', lang);
+}
+
+String? getLanguage()
+{
+  return sharedPreferences!.getString('lang');
+}
+
+Future<void> loadLanguage() async
+{
+
+  String? oldLang= getLanguage();
+  if(oldLang != null)
+    {
+      languag = oldLang;
+      notifyListeners();
+    }
+}
+
+Future<void> initSettings()async
+{
+  sharedPreferences =await SharedPreferences.getInstance();
+  await loadThemeData();
+  await loadLanguage();
+}
+
+
 }

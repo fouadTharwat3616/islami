@@ -28,11 +28,14 @@ class _SebhaTapState extends State<SebhaTap> {
           onTap: () {
             counter_string++;
             counter = counter_string.toString();
-            setState(() => turns+= 1/34);
+
+            setState(() {
+              turns+= 1/34;
+            });
           },
           child: AnimatedRotation(
             turns: turns,
-            duration: Duration(seconds: 1),
+            duration: const Duration(seconds: 1),
             child: Container(
                 margin: EdgeInsets.symmetric(horizontal: MediaQuery
                     .of(context)
@@ -52,7 +55,7 @@ class _SebhaTapState extends State<SebhaTap> {
           textAlign: TextAlign.center,
         ),
         Container(
-          padding: EdgeInsets.symmetric(vertical: 25, horizontal: 20),
+          padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 20),
           decoration: BoxDecoration(
               color: Provider
                   .of<settingsProvider>(context)
@@ -69,7 +72,7 @@ class _SebhaTapState extends State<SebhaTap> {
           ),
         ),
         Container(
-          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
           decoration: BoxDecoration(
             color: Provider
                 .of<settingsProvider>(context)

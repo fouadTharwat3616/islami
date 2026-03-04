@@ -30,9 +30,9 @@ class quranTap extends StatelessWidget {
       alignment: Alignment.center,
       children: [
         Container(
-          padding: EdgeInsets.only(top:230),
+          padding: const EdgeInsets.only(top:230),
           child: VerticalDivider(
-            thickness: 5,
+            thickness: 7,
             color: Provider.of<settingsProvider>(context).container,
           ),
         ),
@@ -45,7 +45,7 @@ class quranTap extends StatelessWidget {
               height: 4,
               width: double.infinity,
               color: Provider.of<settingsProvider>(context).container,
-              margin: EdgeInsets.only(bottom: 5),
+              margin: const EdgeInsets.only(bottom: 5),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -59,14 +59,17 @@ class quranTap extends StatelessWidget {
               height: 4,
               width: double.infinity,
               color: Provider.of<settingsProvider>(context).container,
-              margin: EdgeInsets.only(bottom: 5),
+              margin: const EdgeInsets.only(bottom: 5),
             ),
+            
             Expanded(
-              child: ListView.separated(itemBuilder: (context, index) =>
+              child: ListView.separated(
+                itemBuilder: (context, index) =>
                   InkWell(
                     onTap: (){
                       Navigator.of(context).pushNamed(suraDetails.routeName,
-                      arguments: suraArgs(index, suraNames[index]));
+                      arguments: suraArgs(index, suraNames[index])
+                      );
                     },
                 child: Row(
                   children: [
@@ -88,7 +91,13 @@ class quranTap extends StatelessWidget {
                 ),
               ),
                 itemCount: suraNames.length,
-                separatorBuilder:(context, index) => SizedBox(height: 8),
+                separatorBuilder:(context, index) =>  Divider(
+                  height: 8,
+                  thickness: 2,
+                  endIndent: MediaQuery.of(context).size.width*.1,
+                  indent: MediaQuery.of(context).size.width*.1,
+                  color: Provider.of<settingsProvider>(context).container,
+                ),
               ),
             )
           ],

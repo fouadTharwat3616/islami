@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:islami/app_theme.dart';
+import 'package:islami/home_screen.dart';
 import 'package:islami/tabs/hadeth/hadeth_data.dart';
 import 'package:islami/tabs/settings/settings_provider.dart';
 import 'package:provider/provider.dart';
@@ -18,6 +19,17 @@ class HadethDetails extends StatelessWidget {
         ),
         child: Scaffold(
           appBar: AppBar(
+            leading: InkWell(
+              onTap: (){
+                Navigator.pop(context);
+              },
+              child: Icon(
+                Icons.arrow_back_sharp,
+                color:Provider.of<settingsProvider>(context).azqar_bk_color ,
+
+              ),
+            ),
+            elevation: 0,
             title: Text(
                hadeth.title
             ),
@@ -28,7 +40,7 @@ class HadethDetails extends StatelessWidget {
                 color: Provider.of<settingsProvider>(context).container_hadeth_details_screen,
                 borderRadius: BorderRadius.circular(25)
             ),
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             margin: EdgeInsets.symmetric(
                 horizontal: MediaQuery.of(context).size.width* .05,
                 vertical: MediaQuery.of(context).size.width*.05

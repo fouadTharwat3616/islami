@@ -4,6 +4,8 @@ import 'package:islami/tabs/settings/settings.dart';
 import 'package:islami/tabs/settings/settings.dart';
 import 'package:islami/tabs/settings/settings_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class Settings extends StatefulWidget {
   @override
@@ -18,11 +20,11 @@ class _SettingsState extends State<Settings> {
     return Column(
       children: [
       Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Dark Mode',
+            Text(AppLocalizations.of(context)!.darkmode,
             style: Theme.of(context).textTheme.titleMedium?.copyWith( color: Provider.of<settingsProvider>(context).settings_text),),
             Switch(
                 value:  provider.themeMode==ThemeMode.dark,
@@ -41,39 +43,40 @@ class _SettingsState extends State<Settings> {
           ],
         ),
       ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-          Text('Language',
-            style: Theme.of(context).textTheme.titleMedium?.copyWith( color: Provider.of<settingsProvider>(context).settings_text),),
-          SizedBox(
-            width: MediaQuery.of(context).size.width*.3,
-            child: DropdownButtonHideUnderline(
-              child: DropdownButton<language>(
-                value: languages.firstWhere((lang) => lang.code==provider.languag) ,
-                  items: languages.map(
-                          (language) => DropdownMenuItem(
-                            value: language,
-                      child: Text(language.name,
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith( color: Provider.of<settingsProvider>(context).settings_text),
-                      ),
-                  )
-                  ).toList(),
-                  onChanged: (selectedLanguage){
-                  if(selectedLanguage !=null)
-                    {
-                      provider.changeLanguage(selectedLanguage.code);
-                    }
-                  setState(() {
+        Padding(
+          padding:const EdgeInsets.symmetric(horizontal: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+            Text(AppLocalizations.of(context)!.lang,
+              style: Theme.of(context).textTheme.titleMedium?.copyWith( color: Provider.of<settingsProvider>(context).settings_text),),
+            SizedBox(
+              width: MediaQuery.of(context).size.width*.3,
+              child: DropdownButtonHideUnderline(
+                child: DropdownButton<language>(
+                  value: languages.firstWhere((x) => x.code==provider.languag) ,
+                    items: languages.map((language) => DropdownMenuItem(
+                              value: language,
+                        child: Text(language.name,
+                          style: Theme.of(context).textTheme.titleMedium?.copyWith( color: Provider.of<settingsProvider>(context).settings_text),
+                        ),
+                    )
+                    ).toList(),
+                    onChanged: (selectedLanguage){
+                    if(selectedLanguage !=null)
+                      {
+                        provider.changeLanguage(selectedLanguage.code);
+                      }
+                    setState(() {
 
-                  });
-                  },
-                borderRadius: BorderRadius.circular(20),
-                  ),
-
-            ),
-          )
-        ],)
+                    });
+                    },
+                  borderRadius: BorderRadius.circular(20),
+                    ),
+              ),
+            )
+          ],),
+        )
     ],
     );
   }
